@@ -1,0 +1,4 @@
+#ifdef _WRITE_BOT_USER_SETUP_H_
+#define _WRITE_BOT_USER_SETUP_H_
+
+#endif //_WRITE_BOT_USER_SETUP_H_
