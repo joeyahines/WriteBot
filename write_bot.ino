@@ -103,28 +103,23 @@ void loop()
   delay(500);
 
 #else
+    if (!servo1.attached()) servo1.attach(SERVOPINLIFT);
+    if (!servo2.attached()) servo2.attach(SERVOPINLEFT);
+    if (!servo3.attached()) servo3.attach(SERVOPINRIGHT);
 
-    int i = 0;
-    if (last_min != minute()) {
+    number(34, 25, 1, 0.9);
 
-        if (!servo1.attached()) servo1.attach(SERVOPINLIFT);
-        if (!servo2.attached()) servo2.attach(SERVOPINLEFT);
-        if (!servo3.attached()) servo3.attach(SERVOPINRIGHT);
+    number(48, 25, 2, 0.9);
 
-        number(34, 25, 1, 0.9);
+    lift(2);
+    drawTo(PARKX, PARKY);
+    lift(1);
 
-        number(48, 25, 2, 0.9);
+    servo1.detach();
+    servo2.detach();
+    servo3.detach();
+    delay(5000);
 
-        lift(2);
-        drawTo(PARKX, PARKY);
-        lift(1);
-
-        servo1.detach();
-        servo2.detach();
-        servo3.detach();
-
-        delay(5000);
-    }
 
 #endif
 
@@ -144,7 +139,7 @@ void number(float bx, float by, int num, float scale) {
         case 0:
             drawTo(bx + 12 * scale, by + 6 * scale);
             lift(0);
-            bogenGZS(bx + 7 * scale, by + 10 * scale, 10 * scale, -0.8, 6.7, 0.5);
+            arc_counterclockwise(bx + 7 * scale, by + 10 * scale, 10 * scale, -0.8, 6.7, 0.5);
             lift(1);
             break;
         case 1:
@@ -158,7 +153,7 @@ void number(float bx, float by, int num, float scale) {
         case 2:
             drawTo(bx + 2 * scale, by + 12 * scale);
             lift(0);
-            bogenUZS(bx + 8 * scale, by + 14 * scale, 6 * scale, 3, -0.8, 1);
+            arc_clockwise(bx + 8 * scale, by + 14 * scale, 6 * scale, 3, -0.8, 1);
             drawTo(bx + 1 * scale, by + 0 * scale);
             drawTo(bx + 12 * scale, by + 0 * scale);
             lift(1);
@@ -166,8 +161,8 @@ void number(float bx, float by, int num, float scale) {
         case 3:
             drawTo(bx + 2 * scale, by + 17 * scale);
             lift(0);
-            bogenUZS(bx + 5 * scale, by + 15 * scale, 5 * scale, 3, -2, 1);
-            bogenUZS(bx + 5 * scale, by + 5 * scale, 5 * scale, 1.57, -3, 1);
+            arc_clockwise(bx + 5 * scale, by + 15 * scale, 5 * scale, 3, -2, 1);
+            arc_clockwise(bx + 5 * scale, by + 5 * scale, 5 * scale, 1.57, -3, 1);
             lift(1);
             break;
         case 4:
@@ -181,7 +176,7 @@ void number(float bx, float by, int num, float scale) {
         case 5:
             drawTo(bx + 2 * scale, by + 5 * scale);
             lift(0);
-            bogenGZS(bx + 5 * scale, by + 6 * scale, 6 * scale, -2.5, 2, 1);
+            arc_counterclockwise(bx + 5 * scale, by + 6 * scale, 6 * scale, -2.5, 2, 1);
             drawTo(bx + 5 * scale, by + 20 * scale);
             drawTo(bx + 12 * scale, by + 20 * scale);
             lift(1);
@@ -189,7 +184,7 @@ void number(float bx, float by, int num, float scale) {
         case 6:
             drawTo(bx + 2 * scale, by + 10 * scale);
             lift(0);
-            bogenUZS(bx + 7 * scale, by + 6 * scale, 6 * scale, 2, -4.4, 1);
+            arc_clockwise(bx + 7 * scale, by + 6 * scale, 6 * scale, 2, -4.4, 1);
             drawTo(bx + 11 * scale, by + 20 * scale);
             lift(1);
             break;
@@ -203,15 +198,15 @@ void number(float bx, float by, int num, float scale) {
         case 8:
             drawTo(bx + 5 * scale, by + 10 * scale);
             lift(0);
-            bogenUZS(bx + 5 * scale, by + 15 * scale, 5 * scale, 4.7, -1.6, 1);
-            bogenGZS(bx + 5 * scale, by + 5 * scale, 5 * scale, -4.7, 2, 1);
+            arc_clockwise(bx + 5 * scale, by + 15 * scale, 5 * scale, 4.7, -1.6, 1);
+            arc_counterclockwise(bx + 5 * scale, by + 5 * scale, 5 * scale, -4.7, 2, 1);
             lift(1);
             break;
 
         case 9:
             drawTo(bx + 9 * scale, by + 11 * scale);
             lift(0);
-            bogenUZS(bx + 7 * scale, by + 15 * scale, 5 * scale, 4, -0.5, 1);
+            arc_clockwise(bx + 7 * scale, by + 15 * scale, 5 * scale, 4, -0.5, 1);
             drawTo(bx + 5 * scale, by + 0);
             lift(1);
             break;
@@ -248,11 +243,11 @@ void number(float bx, float by, int num, float scale) {
         case 11: //Draw ":"
             drawTo(bx + 5 * scale, by + 15 * scale);
             lift(0);
-            bogenGZS(bx + 5 * scale, by + 15 * scale, 0.1 * scale, 1, -1, 1);
+            arc_counterclockwise(bx + 5 * scale, by + 15 * scale, 0.1 * scale, 1, -1, 1);
             lift(1);
             drawTo(bx + 5 * scale, by + 5 * scale);
             lift(0);
-            bogenGZS(bx + 5 * scale, by + 5 * scale, 0.1 * scale, 1, -1, 1);
+            arc_counterclockwise(bx + 5 * scale, by + 5 * scale, 0.1 * scale, 1, -1, 1);
             lift(1);
             break;
 
@@ -344,7 +339,7 @@ void lift(char lift) {
  * @param scale     scales the x axis to make the arc more oval. 1 is a circle, 0.5 is an oval
  */
 void arc_clockwise(float bx, float by, float radius, int start, int end, float scale) {
-    float incr = -0.05;
+    float inc = -0.05;
     float count = 0;
 
     do {
@@ -365,13 +360,13 @@ void arc_clockwise(float bx, float by, float radius, int start, int end, float s
  * @param scale     scales the x axis to make the arc more oval. 1 is a circle, 0.5 is an oval
  */
 void arc_counterclockwise(float bx, float by, float radius, int start, int end, float scale) {
-    float inkr = 0.05;
+    float inc = 0.05;
     float count = 0;
 
     do {
         drawTo(scale * radius * cos(start + count) + bx,
                radius * sin(start + count) + by);
-        count += inkr;
+        count += inc;
     }
     while ((start + count) <= end);
 }
