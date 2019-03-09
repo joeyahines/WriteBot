@@ -14,7 +14,7 @@
 //       - see http://www.pjrc.com/teensy/td_libs_DS1307RTC.html for how to hook up the real time clock
 //
 // 1.03  Remix/mod by Kjetil Egeland
-// 2.0  Adapted code base
+// 2.0  Adapted code base - Joey Hines
 
 // delete or mark the next line as comment if you don't need these
 //#define CALIBRATION      // enable calibration mode
